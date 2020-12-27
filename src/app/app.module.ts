@@ -12,9 +12,10 @@ import { NotFoundComponent } from './componentes/not-found/not-found.component';
 
 // Firebase
 import { AngularFireAuthModule } from "@angular/fire/auth";
-// import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { RegistrarseComponent } from './autenticacion/registrarse/registrarse.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,17 @@ import { AngularFireModule } from '@angular/fire';
     UserDirective,
     LoginComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegistrarseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireDatabaseModule
     // AngularFirestoreModule,
+    
   ],
   providers: [AutenticacionService],
   bootstrap: [AppComponent]

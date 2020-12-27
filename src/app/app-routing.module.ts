@@ -6,6 +6,7 @@ import { AppRoutingGuard } from './app-routing.guard';
 import { Role } from './modelos/role';
 import { HomeComponent } from './componentes/home/home.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
+import { RegistrarseComponent } from './autenticacion/registrarse/registrarse.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'registrarse',
+        component: RegistrarseComponent
       }
     ]
   },

@@ -10,7 +10,7 @@
     </li>
 
     <!-- Admin only -->
-    <li class="nav-item" *ngIf="isAdmin">
+    <li class="nav-item" *ngIf="isSsia">
       <a class="nav-link" [routerLink]="['admin', 'dashboard']">Dashboard</a>
     </li>
 
@@ -27,7 +27,7 @@
 
   <span class="navbar-text">
     <span class="badge badge-warning" *ngIf="isAuthorized">Authorized</span>
-    <span class="badge badge-danger" *ngIf="isAdmin">Admin</span>
+    <span class="badge badge-danger" *ngIf="isSsia">Admin</span>
   </span>
 </header>
 

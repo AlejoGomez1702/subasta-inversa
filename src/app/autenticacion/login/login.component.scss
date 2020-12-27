@@ -1,0 +1,32 @@
+button.center
+{
+    display: block;
+    margin: 0 auto;
+}
+
+small
+{
+    color: red;
+}
+
+#emailHelp
+{
+    color: red;
+}
+
+.red-color
+{
+    color: red;
+}
+
+.crear-cuenta
+{    
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;   
+}
+
+.crear-cuenta:hover {
+    text-decoration:none;
+    text-shadow: 1px 1px 1px #555;
+}

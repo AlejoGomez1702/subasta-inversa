@@ -12,15 +12,15 @@ export class LoginComponent implements OnInit
 {
   Role = Role;
 
-  constructor(private router: Router, private autenticacionService: AutenticacionService) { }
+  constructor(private router: Router, public autenticacionService: AutenticacionService) { }
 
   ngOnInit(): void {
   }
 
-  login(role: Role) 
-  {
-    this.autenticacionService.login(role);
-    this.router.navigate(['/']);
-  }
+  // login(role: Role) 
+  // {
+  //   this.autenticacionService.login(role);
+  //   this.router.navigate(['/']);
+  // }
 
 }

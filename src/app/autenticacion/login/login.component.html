@@ -1,11 +1,48 @@
-<div class="alert alert-success" role="alert">
-    Login component!
+<!-- <div class="displayTable">
+    <div class="displayTableCell">
+  
+      <div class="authBlock">
+        <h3>Iniciar Sesión</h3>
+        <div class="formGroup">
+          <input type="text" class="formControl" placeholder="Username" #userName required>
+        </div>
+  
+        <div class="formGroup">
+          <input type="password" class="formControl" placeholder="Password" #userPassword required>
+        </div>
+
+        <div class="formGroup">
+          <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
+        </div>
+  
+        <div class="formGroup">
+          <span class="or"><span class="orInner">Or</span></span>
+        </div>
+  
+      </div>
+  
+      <div class="redirectToLogin">
+        <span>Don't have an account?<span class="redirect" routerLink="/register-user"> Sign Up</span></span>
+      </div>
+  
+    </div>
 </div>
-<button 
-    class="btn btn-outline-warning" 
-    (click)="login(Role.User)">Login as User
-</button>
-<button 
-    class="btn btn-outline-danger" 
-    (click)="login(Role.Admin)">Login as Admin
-</button>
+   -->
+<h2 class="text-center">
+    Iniciar Sesión
+</h2>
+
+<form>
+    <div class="form-group">
+      <label for="inpEmail">Correo Electrónico</label>
+      <input type="email" class="form-control" id="inpEmail"  placeholder="Ingrese su correo..." #userEmail required>
+    </div>
+    <div class="form-group">
+      <label for="inpPassword">Contraseña</label>
+      <input type="password" aria-describedby="emailHelp" class="form-control" id="inpPassword" placeholder="Ingrese su contraseña..." #userPassword required>
+    </div>
+    <button type="submit" class="btn btn-primary center" (click)="autenticacionService.signIn(userEmail.value, userPassword.value)">Ingresar</button>
+    <div class="redirectToLogin">
+        <span>No tienes una cuenta?<span class="redirect crear-cuenta" routerLink="/registrarse">Crear Una</span></span>
+    </div>
+</form>
