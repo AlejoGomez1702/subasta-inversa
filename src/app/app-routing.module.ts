@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './autenticacion/login/login.component';
 import { AutenticacionService } from './servicios/autenticacion.service';
-import { AppRoutingGuard } from './app-routing.guard';
 import { Role } from './modelos/role';
 import { HomeComponent } from './componentes/home/home.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
@@ -35,13 +34,6 @@ const routes: Routes = [
   },
   {
     path: 'ssia',
-    canLoad: [AppRoutingGuard],
-    canActivate: [AppRoutingGuard],
-    data: {
-      roles: [
-        Role.Ssia,
-      ]
-    },
     loadChildren: () => import('./ssia/ssia.module').then(m => m.SsiaModule)
   },
   {
@@ -54,8 +46,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [
-    AutenticacionService,
-    AppRoutingGuard
+    // AutenticacionService,
+    // AppRoutingGuard
   ]
 })
 export class AppRoutingModule { }

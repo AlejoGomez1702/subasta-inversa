@@ -1,10 +1,12 @@
 import { Injectable, NgZone } from '@angular/core';
 
-import { User } from '../modelos/user';
+import { User } from '../interfaces/user';
 import { Role } from '../modelos/role';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { DatabaseService } from './database.service';
+import { Proveedor } from '../interfaces/proveedor';
 
 
 @Injectable({
@@ -12,64 +14,94 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class AutenticacionService 
 {
-  private user!: User;
+  // Se loguea un usuario SSIA.
+  private user: User;
+
+  // Se loguea un proveedor.
+  private proveedor: Proveedor;
+
+  public isLoggedIn = false;
 
   constructor(
     public afAuth: AngularFireAuth,
-    public db: AngularFireDatabase,
+    public db: DatabaseService,
     public router: Router,  
-    public ngZone: NgZone // NgZone service to remove outside scope warning
   )
   {}
 
   // Sign in with email/password
-  signIn(email, password) {
+  signInUser(email, password) 
+  {
     return this.afAuth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
-        this.ngZone.run(() => {
-          this.router.navigate(['']);
+      .then((user) => {
+        let userUid = user.user.uid;
+        window.alert('Se logueo correctamente el usuario');
+        // Obteniendo el usuario de la base de datos.
+        this.db.getUserById(userUid)
+        .then(() => {
+          this.user = this.db.usuarioLogueado;
+          this.isLoggedIn = true;
+          this.router.navigate(['ssia']);
         });
-        // this.SetUserData(result.user);
       }).catch((error) => {
-        window.alert(error.message)
-      })
+        window.alert(error.message);
+      });
   }
 
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user) {
-    // const userRef: AngularFirestoreDocument<any> = this.db.doc(`users/${user.uid}`);
-    // const userData: User = {
-    //   uid: user.uid,
-    //   email: user.email,
-    //   displayName: user.displayName,
-    //   photoURL: user.photoURL,
-    //   emailVerified: user.emailVerified
-    // }
-    // return userRef.set(userData, {
-    //   merge: true
-    // })
-  }
-
-  isAuthorized() 
+  signInProveedor(email, password)
   {
-      return !!this.user;
+    return this.afAuth.signInWithEmailAndPassword(email, password)
+    .then((user) => {
+      // console.log(user.user.uid);
+      let userUid = user.user.uid;
+      window.alert('Se logueo correctamente el proveedor');
+      // Obteniendo el usuario de la base de datos.
+      this.db.getProveedorById(userUid)
+      .then(() => {
+        this.proveedor = this.db.proveedorLogueado;
+        this.isLoggedIn = true;
+        this.router.navigate(['proveedor']);
+      });
+    }).catch((error) => {
+      window.alert(error.message);
+    });
   }
 
-  hasRole(role: Role) 
+  // Registra un proveedor
+  signUpProveedor(provName, provDirec, provTel, provWeb, email: string, password : string)
   {
-      return this.isAuthorized() && this.user.role === role;
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
+    .then((user) => {      
+      let uid = user.user.uid;
+      this.isLoggedIn = true;
+      this.db.guardarProveedorNuevo(uid, provName, provDirec, provTel, provWeb, email);
+      window.alert('Se registro el proveedor correctamente');
+      this.router.navigate(['login']);
+    })
+    .catch((error) => {
+      console.log(error.code);
+      console.log(error.message);
+      window.alert(error.message);
+    });
   }
 
-  login(role: Role) 
+  // Registra un usuario Ssia
+  signUpUsuario(userName, userApellidos, userEmail, userPassword)
   {
-    this.user = { role: role };
+    return this.afAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+    .then((user) => {            
+      let uid = user.user.uid;
+      this.isLoggedIn = true;
+      this.db.guardarUsuarioNuevo(uid, userName, userApellidos, userEmail);
+      window.alert('Se registro el usuario correctamente');
+      this.router.navigate(['login']);
+    })
+    .catch((error) => {
+      console.log(error.code);
+      console.log(error.message);
+      window.alert(error.message);
+    });
   }
 
-  logout() 
-  {
-    this.user = null;
-  }
+  
 }

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PanelSsiaComponent } from './panel-ssia/panel-ssia.component';
 
 const routes: Routes = [
-  { path: 'panel/ssia', component: PanelSsiaComponent }
+  { path: '', component: PanelSsiaComponent }
 ];
 
 @NgModule({

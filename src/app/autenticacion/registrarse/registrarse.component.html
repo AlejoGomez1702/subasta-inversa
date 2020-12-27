@@ -1,1 +1,98 @@
-<p>registrarse works!</p>
+<h2 class="text-center">
+    Registrar Usuario
+</h2>
+
+<!-- Proveedor o SSIA -->
+<div class="form-group">
+    <label for="selectUser">Seleccione el tipo de usuario:</label>
+    <select class="form-control" id="selectUser" #userSelect required (change)="cambiarEstado(userSelect.value)">
+        <option value="ssia">Usuario SSIA</option>
+        <option value="proveedor">Proveedor</option>
+    </select>
+</div>
+
+<!-- Proveedor -->
+<ng-container *ngIf="proveedor">
+    
+    <div>
+        <!-- Nombre -->
+        <div class="form-group">
+            <label for="inpNameProv">Nombre:</label>
+            <input type="text" class="form-control" id="inpNameProv" placeholder="Ingrese el nombre de la empresa..." #provName required>
+        </div>
+
+        <!-- Dirección -->
+        <div class="form-group">
+            <label for="inpDirProv">Dirección:</label>
+            <input type="text" class="form-control" id="inpDirProv" placeholder="Ingrese la dirección de la empresa..." #provDirec required>
+        </div>
+
+        <!-- Telefono -->
+        <div class="form-group">
+            <label for="inpTelProv">Teléfono:</label>
+            <input type="text" class="form-control" id="inpTelProv" placeholder="Ingrese el teléfono de la empresa..." #provTel required>
+        </div>
+
+        <!-- WEB -->
+        <div class="form-group">
+            <label for="inpWebProv">WEB:</label>
+            <input type="text" class="form-control" id="inpWebProv" placeholder="Ingrese el enlace a la página web de la empresa..." #provWeb required>
+        </div>
+
+        <!-- Correo -->
+        <div class="form-group">
+            <label for="inpEmail">Correo Electrónico</label>
+            <input type="email" class="form-control" id="inpEmail"  placeholder="Ingrese su correo..." #provEmail required>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-group">
+            <label for="inpPassword">Contraseña</label>
+            <input type="password" class="form-control" id="inpPassword" placeholder="Ingrese su contraseña..." #provPassword required>
+        </div>
+
+        <!-- Boton Proveedor -->
+        <button class="btn btn-primary center"  
+            (click)="registrarProveedor(provName.value, provDirec.value, provTel.value, provWeb.value, provEmail.value, provPassword.value)">
+            Registrarse
+        </button>
+    </div>
+
+</ng-container>
+
+<!-- Usuario SSIA -->
+<ng-container *ngIf="!proveedor">
+
+    <div>
+        <!-- Nombres -->
+        <div class="form-group">
+            <label for="inpName">Nombres:</label>
+            <input type="text" class="form-control" id="inpName" placeholder="Ingrese sus nombres..." #userName required>
+        </div>
+
+        <!-- Apellidos -->
+        <div class="form-group">
+            <label for="inpApellidos">Apellidos:</label>
+            <input type="text" class="form-control" id="inpApellidos" placeholder="Ingrese sus apellidos..." #userApellidos required>
+        </div>
+
+        <!-- Correo -->
+        <div class="form-group">
+            <label for="inpEmail">Correo Electrónico</label>
+            <input type="email" class="form-control" id="inpEmail"  placeholder="Ingrese su correo..." #userEmail required>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-group">
+            <label for="inpPassword">Contraseña</label>
+            <input type="password" class="form-control" id="inpPassword" placeholder="Ingrese su contraseña..." #userPassword required>
+        </div>
+
+        <!-- Boton SSIA -->
+        <button class="btn btn-primary center" 
+            (click)="registrarUsuario(userName.value, userApellidos.value, userEmail.value, userPassword.value)">
+            Registrarse
+        </button>
+    </div>
+
+</ng-container>

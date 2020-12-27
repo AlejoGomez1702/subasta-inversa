@@ -5,29 +5,29 @@
     </li>
 
     <!-- Authorized only -->
-    <li class="nav-item" *ngIf="isAuthorized">
+    <li class="nav-item" >
       <a class="nav-link" [routerLink]="['profile']">Profile</a>
     </li>
 
     <!-- Admin only -->
-    <li class="nav-item" *ngIf="isSsia">
+    <li class="nav-item" >
       <a class="nav-link" [routerLink]="['admin', 'dashboard']">Dashboard</a>
     </li>
 
     <!-- Anonymous only -->
-    <li class="nav-item" *ngIf="!isAuthorized">
+    <li class="nav-item" >
       <a class="nav-link" [routerLink]="['login']">Login</a>
     </li>
 
     <!-- Authorized only -->
-    <li class="nav-item" *ngIf="isAuthorized">
-      <a class="nav-link" (click)="logout()">Logout</a>
+    <li class="nav-item" >
+      <a class="nav-link" >Logout</a>
     </li>
   </ul>
 
   <span class="navbar-text">
-    <span class="badge badge-warning" *ngIf="isAuthorized">Authorized</span>
-    <span class="badge badge-danger" *ngIf="isSsia">Admin</span>
+    <span class="badge badge-warning" >Authorized</span>
+    <span class="badge badge-danger" >Admin</span>
   </span>
 </header>
 

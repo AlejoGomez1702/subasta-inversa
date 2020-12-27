@@ -16,17 +16,17 @@ export class AppComponent {
               private authService: AutenticacionService) 
   { }
 
-  get isAuthorized() {
-    return this.authService.isAuthorized();
-  }
+  // get isAuthorized() {
+  //   return this.authService.isAuthorized();
+  // }
 
-  get isSsia() {
-    return this.authService.hasRole(Role.Ssia);
-  }
+  // get isSsia() {
+  //   return this.authService.hasRole(Role.Ssia);
+  // }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['login']);
-  }
+  // logout() {
+  //   this.authService.logout();
+  //   this.router.navigate(['login']);
+  // }
 
 }
