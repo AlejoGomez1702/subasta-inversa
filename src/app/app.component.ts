@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Role } from './modelos/role';
+import { Proveedor } from './interfaces/proveedor';
+import { User } from './interfaces/user';
 import { AutenticacionService } from './servicios/autenticacion.service';
 
 
@@ -9,24 +10,45 @@ import { AutenticacionService } from './servicios/autenticacion.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'subasta-inversa';
+export class AppComponent implements OnInit
+{
+  // 0 => NO, 1 => Usuario SSIC, 2 => Proveedor.
+  public logueado: number;
 
   constructor(private router: Router, 
-              private authService: AutenticacionService) 
+              public authService: AutenticacionService) 
   { }
 
-  // get isAuthorized() {
-  //   return this.authService.isAuthorized();
+  ngOnInit(): void
+  {
+    this.verificarLogueo();
+  }
+
+  verificarLogueo()
+  {
+    let userLogin = localStorage.getItem('user');
+    let user: User | Proveedor = JSON.parse(userLogin);
+    if(userLogin !== null)
+    {
+      this.authService.logueado = user.tipo;
+    }      
+    else
+    {
+      this.authService.logueado = 0;
+    }      
+  }
+
+  // handleLogin()
+  // {
+  //   this.verificarLogueo();
+  //   console.log('Se esta ejecutando la funcion del evento');
   // }
 
-  // get isSsia() {
-  //   return this.authService.hasRole(Role.Ssia);
-  // }
-
-  // logout() {
-  //   this.authService.logout();
-  //   this.router.navigate(['login']);
-  // }
+  logout()
+  {
+    this.authService.cerrarSesion();
+    this.authService.logueado = 0;
+    this.router.navigate(['']);    
+  }
 
 }

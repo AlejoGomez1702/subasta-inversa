@@ -1,0 +1,35 @@
+<h2 class="text-center">
+    Crear nueva subasta
+</h2>
+
+<div>
+    <!-- Nombres -->
+    <div class="form-group">
+        <label for="inpName">Nombres:</label>
+        <input type="text" class="form-control" id="inpName" placeholder="Ingrese sus nombres..." #userName required>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="form-group">
+        <label for="inpApellidos">Apellidos:</label>
+        <input type="text" class="form-control" id="inpApellidos" placeholder="Ingrese sus apellidos..." #userApellidos required>
+    </div>
+
+    <!-- Correo -->
+    <div class="form-group">
+        <label for="inpEmail">Correo Electrónico</label>
+        <input type="email" class="form-control" id="inpEmail"  placeholder="Ingrese su correo..." #userEmail required>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group">
+        <label for="inpPassword">Contraseña</label>
+        <input type="password" class="form-control" id="inpPassword" placeholder="Ingrese su contraseña..." #userPassword required>
+    </div>
+
+    <!-- Boton SSIA -->
+    <button class="btn btn-primary center" 
+        (click)="registrarUsuario(userName.value, userApellidos.value, userEmail.value, userPassword.value)">
+        Registrarse
+    </button>
+</div>

@@ -23,7 +23,8 @@ export class DatabaseService
       direccion: provDirec,
       telefono: provTel,
       web: provWeb,
-      email: email
+      email: email,
+      tipo: 2
     });
   }
 
@@ -32,7 +33,8 @@ export class DatabaseService
     this.db.database.ref('usuarios/' + uid).set({
       nombre: userName,
       apellidos: userApellidos,
-      email: userEmail
+      email: userEmail,
+      tipo: 1
     });
   }
 

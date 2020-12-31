@@ -7,4 +7,5 @@ export interface Proveedor
     web: string;
     correo: string;
     contrasena: string;
+    tipo: number;
 }

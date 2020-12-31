@@ -1,1 +1,24 @@
-<p>panel-ssia works!</p>
+<div class="card-group"> 
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem; ">
+        <!-- <div class="card-header">Subasta</div> -->
+        <div class="card-body">
+          <h5 class="card-title">Subastas Activas</h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          <h4>3</h4>
+        </div>
+    </div>
+
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem; ">
+        <!-- <div class="card-header">Header</div> -->
+        <div class="card-body">
+          <h5 class="card-title">Subastas Cerradas</h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          <h4>3</h4>
+        </div>
+    </div>
+</div>
+
+<div >
+    <button class="btn btn-success center" [routerLink]="['subastas/nueva']">Nueva Subasta</button>
+    <button class="btn btn-success center mt-4">Ver Inventario</button>
+</div>

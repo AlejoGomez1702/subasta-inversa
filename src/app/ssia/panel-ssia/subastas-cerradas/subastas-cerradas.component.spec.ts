@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PanelSsiaComponent } from './panel-ssia.component';
+import { SubastasCerradasComponent } from './subastas-cerradas.component';
 
-describe('PanelSsiaComponent', () => {
-  let component: PanelSsiaComponent;
-  let fixture: ComponentFixture<PanelSsiaComponent>;
+describe('SubastasCerradasComponent', () => {
+  let component: SubastasCerradasComponent;
+  let fixture: ComponentFixture<SubastasCerradasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PanelSsiaComponent ]
+      declarations: [ SubastasCerradasComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PanelSsiaComponent);
+    fixture = TestBed.createComponent(SubastasCerradasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

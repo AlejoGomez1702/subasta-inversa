@@ -20,7 +20,9 @@ export class AutenticacionService
   // Se loguea un proveedor.
   private proveedor: Proveedor;
 
-  public isLoggedIn = false;
+  // Indica el tipo de usuario logueado 
+  // 0 => NO, 1 => Usuario SSIC, 2 => Proveedor.
+  public logueado: number;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -40,7 +42,9 @@ export class AutenticacionService
         this.db.getUserById(userUid)
         .then(() => {
           this.user = this.db.usuarioLogueado;
-          this.isLoggedIn = true;
+          this.logueado = 1;
+          this.user.uid = userUid;
+          localStorage.setItem('user', JSON.stringify(this.user));
           this.router.navigate(['ssia']);
         });
       }).catch((error) => {
@@ -59,7 +63,9 @@ export class AutenticacionService
       this.db.getProveedorById(userUid)
       .then(() => {
         this.proveedor = this.db.proveedorLogueado;
-        this.isLoggedIn = true;
+        this.logueado = 2;
+        this.proveedor.uid = userUid;
+        localStorage.setItem('user', JSON.stringify(this.user));
         this.router.navigate(['proveedor']);
       });
     }).catch((error) => {
@@ -73,7 +79,7 @@ export class AutenticacionService
     return this.afAuth.createUserWithEmailAndPassword(email, password)
     .then((user) => {      
       let uid = user.user.uid;
-      this.isLoggedIn = true;
+      this.logueado = 0;
       this.db.guardarProveedorNuevo(uid, provName, provDirec, provTel, provWeb, email);
       window.alert('Se registro el proveedor correctamente');
       this.router.navigate(['login']);
@@ -91,7 +97,7 @@ export class AutenticacionService
     return this.afAuth.createUserWithEmailAndPassword(userEmail, userPassword)
     .then((user) => {            
       let uid = user.user.uid;
-      this.isLoggedIn = true;
+      this.logueado = 0;
       this.db.guardarUsuarioNuevo(uid, userName, userApellidos, userEmail);
       window.alert('Se registro el usuario correctamente');
       this.router.navigate(['login']);
@@ -101,6 +107,14 @@ export class AutenticacionService
       console.log(error.message);
       window.alert(error.message);
     });
+  }
+
+
+  cerrarSesion()
+  {
+    this.afAuth.signOut();
+    localStorage.removeItem('user');
+    window.alert('Sesión cerrada correctamente!');
   }
 
   

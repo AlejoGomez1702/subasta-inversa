@@ -11,8 +11,8 @@
       <label for="inpPassword">Contraseña</label>
       <input type="password" aria-describedby="emailHelp" class="form-control" id="inpPassword" placeholder="Ingrese su contraseña..." #userPassword required>
     </div>
-    <button class="btn btn-primary center" (click)="autenticacionService.signInUser(userEmail.value, userPassword.value)">Ingresar SSIA</button>
-    <button class="btn btn-primary center mt-4" (click)="autenticacionService.signInProveedor(userEmail.value, userPassword.value)">Ingresar Proveedor</button>
+    <button class="btn btn-primary center" (click)="iniciarSesionUser(userEmail.value, userPassword.value)">Ingresar SSIA</button>
+    <button class="btn btn-primary center mt-4" (click)="iniciarSesionProveedor(userEmail.value, userPassword.value)">Ingresar Proveedor</button>
     <div class="redirectToLogin">
         <span>No tienes una cuenta?<span class="redirect crear-cuenta" routerLink="/registrarse">Crear Una</span></span>
     </div>
