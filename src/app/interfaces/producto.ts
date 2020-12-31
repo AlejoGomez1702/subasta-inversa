@@ -4,6 +4,7 @@ export interface Producto
     nombre: string;
     descripcion: string;
     categoria: string;
+    imagen: string;
     costo: number;
-    cantidadMinima: number;
+    // cantidadMinima: number;
 }

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Producto } from '../interfaces/producto';
 import { Proveedor } from '../interfaces/proveedor';
 import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseService 
+export class DatabaseService
 {
   public usuarioLogueado: User;  
   public proveedorLogueado: Proveedor;
+
+  public productos: Producto[];
 
   constructor(
     private db: AngularFireDatabase
@@ -53,6 +56,25 @@ export class DatabaseService
     .then((user) => {
       // console.log(user.val());
       this.proveedorLogueado = user.val();
+    });
+  }
+
+  async obtenerProductos()
+  {
+    let productosResultado: Producto[] = [];
+    let producto: Producto;
+
+    await this.db.database.ref('/productos').once('value')
+    .then((productos) => {
+      productos.forEach(element => {
+        producto = element.val();
+        producto.uid = element.key;
+        productosResultado.push(producto);
+      });    
+
+      this.productos = productosResultado;
+      console.log('Servicio');
+      console.log(productosResultado);
     });
   }
 

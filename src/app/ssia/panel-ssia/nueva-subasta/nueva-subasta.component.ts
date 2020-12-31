@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from 'src/app/servicios/database.service';
 
 @Component({
   selector: 'app-nueva-subasta',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NuevaSubastaComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private databaseService: DatabaseService
+  ) 
+  { }
 
   ngOnInit(): void {
+  }
+
+  crearSubasta()
+  {
+    this.databaseService.obtenerProductos();
   }
 
 }

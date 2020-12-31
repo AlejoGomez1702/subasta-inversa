@@ -3,33 +3,38 @@
 </h2>
 
 <div>
+
+    <app-seleccionar-productos></app-seleccionar-productos>
+
     <!-- Nombres -->
     <div class="form-group">
-        <label for="inpName">Nombres:</label>
-        <input type="text" class="form-control" id="inpName" placeholder="Ingrese sus nombres..." #userName required>
+        <label for="inpDetalle">Detalle:</label>
+        <input type="text" class="form-control" id="inpDetalle" placeholder="Ingrese mas detalles de la subasta..." #subDetalle required>
     </div>
 
     <!-- Apellidos -->
     <div class="form-group">
-        <label for="inpApellidos">Apellidos:</label>
-        <input type="text" class="form-control" id="inpApellidos" placeholder="Ingrese sus apellidos..." #userApellidos required>
+        <label for="inpMax">Valor Máximo:</label>
+        <input type="number" class="form-control" id="inpMax" placeholder="Ingrese el valor maximo de las ofertas..." #subMax required>
     </div>
 
     <!-- Correo -->
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="inpEmail">Correo Electrónico</label>
         <input type="email" class="form-control" id="inpEmail"  placeholder="Ingrese su correo..." #userEmail required>
-    </div>
+    </div> -->
 
     <!-- Contraseña -->
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="inpPassword">Contraseña</label>
         <input type="password" class="form-control" id="inpPassword" placeholder="Ingrese su contraseña..." #userPassword required>
-    </div>
+    </div> -->
 
     <!-- Boton SSIA -->
     <button class="btn btn-primary center" 
-        (click)="registrarUsuario(userName.value, userApellidos.value, userEmail.value, userPassword.value)">
-        Registrarse
+        (click)="crearSubasta()">
+        Crear Subasta
     </button>
 </div>
+
+
