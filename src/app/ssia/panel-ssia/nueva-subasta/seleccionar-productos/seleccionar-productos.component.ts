@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Producto } from 'src/app/interfaces/producto';
 import { DatabaseService } from 'src/app/servicios/database.service';
+import { SubastaService } from 'src/app/servicios/subasta.service';
 
 @Component({
   selector: 'app-seleccionar-productos',
@@ -15,7 +16,8 @@ export class SeleccionarProductosComponent implements OnInit
 
   constructor(
     private modalService: NgbModal,
-    public databaseService: DatabaseService
+    public databaseService: DatabaseService,
+    private subastaService: SubastaService
   ) { }
 
   ngOnInit(): void 
@@ -26,7 +28,7 @@ export class SeleccionarProductosComponent implements OnInit
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+      this.closeResult = `Producto: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -41,6 +43,11 @@ export class SeleccionarProductosComponent implements OnInit
       return `with: ${reason}`;
     }
   }
+
+  selecctionarProducto(producto: Producto)
+  {
+    this.subastaService.producto = producto;
+  } 
 
   // obtenerProductos()
   // {

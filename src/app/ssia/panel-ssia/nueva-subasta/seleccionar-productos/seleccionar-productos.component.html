@@ -15,8 +15,8 @@
                   <h5 class="card-title">{{ producto.nombre }}</h5>
                   <p class="card-text">Categoria: {{ producto.categoria }}</p>
                   <p class="card-text">{{ producto.descripcion }}</p>                  
-                  <h5 class="card-footer">$ {{ producto.costo | milis }}</h5>
-                  <a href="#" class="btn btn-primary">Seleccionar</a>
+                  <!-- <h5 class="card-footer">$ {{ producto.costo | milis }}</h5> -->
+                  <button class="btn btn-primary" (click)="selecctionarProducto(producto); modal.close('Ya Seleccionado')">Seleccionar</button>
                 </div>
             </div>
           </div>

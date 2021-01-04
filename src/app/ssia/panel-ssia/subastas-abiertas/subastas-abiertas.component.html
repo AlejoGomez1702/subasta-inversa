@@ -1,1 +1,23 @@
-<p>subastas-abiertas works!</p>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Detalle</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Valor Máximo</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subasta of subastasAbiertas; index as i">
+        <th scope="row">{{ (i+1) }}</th>
+        <td>{{ subasta.detalle }}</td>
+        <td>{{ subasta.producto.nombre }}</td>
+        <td>{{ subasta.valorMaximo }}</td>
+        <td>
+            <button type="button" class="btn btn-primary" (click)="verSubasta(subasta)">Ver</button>
+            <button type="button" class="btn btn-danger" (click)="eliminarSubasta(subasta.uid)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+</table>

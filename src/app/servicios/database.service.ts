@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Producto } from '../interfaces/producto';
 import { Proveedor } from '../interfaces/proveedor';
+import { Subasta } from '../interfaces/subasa';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class DatabaseService
   public proveedorLogueado: Proveedor;
 
   public productos: Producto[];
+  public subastas: Subasta[] = [];
 
   constructor(
     private db: AngularFireDatabase
@@ -73,9 +75,36 @@ export class DatabaseService
       });    
 
       this.productos = productosResultado;
-      console.log('Servicio');
-      console.log(productosResultado);
     });
+  }
+
+
+  crearSubasta(subasta: Subasta)
+  {
+    return this.db.database.ref('/subastas').push(subasta);
+  }
+
+  async obtenerSubastas()
+  {
+    this.subastas = [];
+    let subastasResultado: Subasta[] = [];
+    let subasta: Subasta;
+
+    await this.db.database.ref('/subastas').once('value')
+    .then((subastas) => {
+      subastas.forEach(element => {
+        subasta = element.val();
+        subasta.uid = element.key;
+        subastasResultado.push(subasta);
+      });    
+
+      this.subastas = subastasResultado;
+    });
+  }
+
+  eliminarSubastaPorID(uid)
+  {
+    return this.db.database.ref('/subastas/' + uid).remove();
   }
 
 }

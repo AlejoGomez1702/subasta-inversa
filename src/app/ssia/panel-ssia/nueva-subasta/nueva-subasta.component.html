@@ -18,21 +18,9 @@
         <input type="number" class="form-control" id="inpMax" placeholder="Ingrese el valor maximo de las ofertas..." #subMax required>
     </div>
 
-    <!-- Correo -->
-    <!-- <div class="form-group">
-        <label for="inpEmail">Correo Electrónico</label>
-        <input type="email" class="form-control" id="inpEmail"  placeholder="Ingrese su correo..." #userEmail required>
-    </div> -->
-
-    <!-- Contraseña -->
-    <!-- <div class="form-group">
-        <label for="inpPassword">Contraseña</label>
-        <input type="password" class="form-control" id="inpPassword" placeholder="Ingrese su contraseña..." #userPassword required>
-    </div> -->
-
     <!-- Boton SSIA -->
     <button class="btn btn-primary center" 
-        (click)="crearSubasta()">
+        (click)="crearSubasta(subDetalle.value, subMax.value)">
         Crear Subasta
     </button>
 </div>

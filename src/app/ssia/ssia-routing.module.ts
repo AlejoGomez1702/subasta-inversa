@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DetalleSubastaComponent } from './panel-ssia/detalle-subasta/detalle-subasta.component';
 import { NuevaSubastaComponent } from './panel-ssia/nueva-subasta/nueva-subasta.component';
 import { PanelSsiaComponent } from './panel-ssia/panel-ssia.component';
+import { SubastasAbiertasComponent } from './panel-ssia/subastas-abiertas/subastas-abiertas.component';
 
 const routes: Routes = [
   { path: '', component: PanelSsiaComponent },
-  { path: 'subastas/nueva', component: NuevaSubastaComponent }
+  { path: 'subastas/nueva', component: NuevaSubastaComponent },
+  { path: 'subastas/abiertas', component: SubastasAbiertasComponent},
+  { path: 'subastas/abiertas/detalle', component: DetalleSubastaComponent }
 ];
 
 @NgModule({

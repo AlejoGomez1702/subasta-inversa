@@ -1,0 +1,41 @@
+<div class="card center" style="width: 40rem;">
+    <img class="card-img-top" [src]="subastaService.subasta.producto.imagen" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ subastaService.subasta.detalle }}</h5>
+      <p class="card-text">Estado =>  {{ subastaService.subasta.estado ? 'Cerrada' : 'Abierta' }}</p>
+      <p class="card-text">Detalle =>  {{ subastaService.subasta.detalle }}</p>
+      <hr>
+      <p class="card-text">Nombre Producto =>  {{ subastaService.subasta.producto.nombre }}</p>
+      <p class="card-text">Categoria =>  {{ subastaService.subasta.producto.categoria }}</p>
+      <p class="card-text">Descripción =>  {{ subastaService.subasta.producto.descripcion }}</p>
+      <p class="card-text">Valor Máximo =>  {{ subastaService.subasta.valorMaximo }}</p>
+      <a href="#" class="btn btn-success">Cerrar Subasta</a>
+    </div>
+</div>
+<br>
+<h2>Ofertas Realizadas Por Proveedores</h2>
+<br>
+<div>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Detalle</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Valor Máximo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"></th>
+            <td>ds</td>
+            <td>ds</td>
+            <td>dsd</td>
+            <td>
+                dsds
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>

@@ -31,6 +31,15 @@ export class AutenticacionService
   )
   {}
 
+
+  obtenerUsuarioLocal(): User
+  {
+    const userLocal = localStorage.getItem('user');
+    const user = JSON.parse(userLocal);
+    this.user = user;
+    return user;
+  }
+
   // Sign in with email/password
   signInUser(email, password) 
   {
