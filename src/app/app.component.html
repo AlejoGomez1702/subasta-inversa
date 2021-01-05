@@ -20,6 +20,11 @@
       <a class="nav-link" [routerLink]="['ssia']">Panel</a>
     </li>
 
+    <!-- Proveedores -->
+    <li class="nav-item" *ngIf="authService.logueado == 2">
+      <a class="nav-link" [routerLink]="['proveedor']">Panel</a>
+    </li>
+
   </ul>
 
 </header>

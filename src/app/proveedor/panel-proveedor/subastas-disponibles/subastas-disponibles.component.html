@@ -1,0 +1,20 @@
+<div style="text-align: center;">
+    <h2>Subastas Disponibles</h2>
+</div>
+<hr>
+<!-- <app-modal-oferta></app-modal-oferta> -->
+<div class="card-group">
+    <div class="card" *ngFor="let subasta of databaseService.subastasDisponibles">
+      <img class="card-img-top" src="{{ subasta.producto.imagen }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ subasta.detalle }}</h5>
+        <p class="card-text">Detalle =>  {{ subasta.detalle }}</p>
+        <hr>
+        <p class="card-text">Nombre Producto =>  {{ subasta.producto.nombre }}</p>
+      <p class="card-text">Categoria =>  {{ subasta.producto.categoria }}</p>
+      <p class="card-text">Descripción =>  {{ subasta.producto.descripcion }}</p>
+      <p class="card-text">Valor Máximo =>  {{ subasta.valorMaximo }}</p>
+      <button class="btn btn-success" (click)="proponerOferta(subasta)">Ofertar</button>
+      </div>
+    </div>
+</div>

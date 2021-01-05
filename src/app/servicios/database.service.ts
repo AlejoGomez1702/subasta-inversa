@@ -15,11 +15,23 @@ export class DatabaseService
 
   public productos: Producto[];
   public subastas: Subasta[] = [];
+  public subastasDisponibles: Subasta[] = [];
 
   constructor(
     private db: AngularFireDatabase
   ) 
   { }
+
+  crearOferta(subasta: Subasta, proveedor: Proveedor, valor: number)
+  {
+    const oferta = {
+      subasta: subasta,
+      proveedor: proveedor,
+      valor: valor
+    };
+
+    return this.db.database.ref('/ofertas').push(oferta);
+  }
 
   guardarProveedorNuevo(uid, provName, provDirec, provTel, provWeb, email: string)
   {
@@ -99,6 +111,27 @@ export class DatabaseService
       });    
 
       this.subastas = subastasResultado;
+    });
+  }
+
+  async obtenerSubastasDisonibles()
+  {
+    this.subastasDisponibles = [];
+    let subastasResultado: Subasta[] = [];
+    let subasta: Subasta;
+
+    await this.db.database.ref('/subastas').once('value')
+    .then((subastas) => {
+      subastas.forEach(element => {
+        subasta = element.val();
+        if(!subasta.estado) // Si la subasta esta disponible
+        {
+          subasta.uid = element.key;
+          subastasResultado.push(subasta);
+        }        
+      });    
+
+      this.subastasDisponibles = subastasResultado;
     });
   }
 

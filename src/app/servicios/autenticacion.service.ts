@@ -1,13 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
 
 import { User } from '../interfaces/user';
-import { Role } from '../modelos/role';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { DatabaseService } from './database.service';
 import { Proveedor } from '../interfaces/proveedor';
-
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +34,14 @@ export class AutenticacionService
     const userLocal = localStorage.getItem('user');
     const user = JSON.parse(userLocal);
     this.user = user;
+    return user;
+  }
+
+  obtenerProveedorLocal(): Proveedor
+  {
+    const userLocal = localStorage.getItem('proveedor');
+    const user = JSON.parse(userLocal);
+    this.proveedor = user;
     return user;
   }
 
@@ -74,7 +79,7 @@ export class AutenticacionService
         this.proveedor = this.db.proveedorLogueado;
         this.logueado = 2;
         this.proveedor.uid = userUid;
-        localStorage.setItem('user', JSON.stringify(this.user));
+        localStorage.setItem('proveedor', JSON.stringify(this.proveedor));
         this.router.navigate(['proveedor']);
       });
     }).catch((error) => {

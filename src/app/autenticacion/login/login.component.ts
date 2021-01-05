@@ -35,10 +35,4 @@ export class LoginComponent implements OnInit
     this.autenticacionService.signInProveedor(userEmail, userPassword)
   }
 
-  // login(role: Role) 
-  // {
-  //   this.autenticacionService.login(role);
-  //   this.router.navigate(['/']);
-  // }
-
 }

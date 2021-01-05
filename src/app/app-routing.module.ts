@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './autenticacion/login/login.component';
-import { AutenticacionService } from './servicios/autenticacion.service';
-import { Role } from './modelos/role';
 import { HomeComponent } from './componentes/home/home.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
 import { RegistrarseComponent } from './autenticacion/registrarse/registrarse.component';
@@ -35,6 +33,10 @@ const routes: Routes = [
   {
     path: 'ssia',
     loadChildren: () => import('./ssia/ssia.module').then(m => m.SsiaModule)
+  },
+  {
+    path: 'proveedor',
+    loadChildren: () => import('./proveedor/proveedor.module').then(m => m.ProveedorModule)
   },
   {
     path: '**',

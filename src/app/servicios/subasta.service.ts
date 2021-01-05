@@ -21,6 +21,11 @@ export class SubastaService
   ) 
   { }
 
+  obtenerSubastasDisponibles()
+  {
+    this.databaseService.obtenerSubastasDisonibles();
+  }
+
   crearSubasta(detalle: string, vMaximo: number)
   {
     let subasta: Subasta;
@@ -40,6 +45,12 @@ export class SubastaService
     }
 
     return false;
+  }
+
+  crearOferta(subasta: Subasta, valor)
+  {
+    const proveedor = this.databaseService.proveedorLogueado;
+    return this.databaseService.crearOferta(subasta, proveedor, valor);
   }
 
   eliminarSubasta(uid)

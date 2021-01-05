@@ -1,0 +1,28 @@
+<div class="card-group"> 
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;" (click)="irSubastasDisponibles()">
+        <div class="card-body">
+          <h5 class="card-title">Subastas Disponibles</h5>
+          <h4>{{ databaseService.subastasDisponibles.length }}</h4>
+        </div>
+    </div>
+
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;" >
+        <div class="card-body">
+          <h5 class="card-title">Subastas Ganadas</h5>
+          <!-- <h4>{{ subastasGanadas.length }}</h4> -->
+        </div>
+    </div>
+
+    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Subastas Ofertadas</h5>
+        <!-- <h4>{{ subastasGanadas.length }}</h4> -->
+      </div>
+  </div>
+
+</div>
+
+<!-- <div >
+    <button class="btn btn-success center" [routerLink]="['subastas/nueva']">Nueva Subasta</button>
+    <button class="btn btn-success center mt-4">Ver Inventario</button>
+</div> -->
