@@ -1,0 +1,34 @@
+<div>
+    <h2 style="text-align: center;">
+      Inventario de las subastas realizadas
+    </h2>
+</div>
+<br>
+  
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Costo General</th>
+        <th scope="col">Costo Subastado</th>
+        <th scope="col">Imagen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let inventario of databaseService.inventario; index as i">
+        <th scope="row">{{ (i+1) }}</th>
+        <td>{{ inventario.producto.nombre }}</td>
+        <td>{{ inventario.producto.descripcion }}</td>
+        <td>{{ inventario.producto.categoria }}</td>
+        <td>{{ inventario.producto.costo }}</td>
+        <td>{{ inventario.valor }}</td>
+        <td><a href="{{ inventario.producto.imagen }}" target="_blank" rel="noopener noreferrer">Ver</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<button class="btn btn-primary center mt-4" [routerLink]="['/ssia']">Atras</button>

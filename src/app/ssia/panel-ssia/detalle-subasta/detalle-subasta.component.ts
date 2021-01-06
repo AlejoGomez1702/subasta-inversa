@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Oferta } from 'src/app/interfaces/oferta';
 import { Subasta } from 'src/app/interfaces/subasa';
 import { DatabaseService } from 'src/app/servicios/database.service';
@@ -16,7 +17,8 @@ export class DetalleSubastaComponent implements OnInit
 
   constructor(
     public subastaService: SubastaService,
-    public databaseService: DatabaseService
+    public databaseService: DatabaseService,
+    private router: Router
   ) 
   {}
 
@@ -39,6 +41,20 @@ export class DetalleSubastaComponent implements OnInit
         this.ofertas.push(oferta);
       }
     });
+  }
+
+  cerrarSubasta(subasta: Subasta)
+  {
+    const result = this.subastaService.cerrarSubasta(subasta);
+    if(!result)
+    {
+      window.alert('No se han realizado ofertas para la subasta seleccionada');
+    }
+    else
+    {
+      window.alert('Subasta cerrada correctamente!');
+      this.router.navigate(['ssia']);
+    }
   }
 
 }

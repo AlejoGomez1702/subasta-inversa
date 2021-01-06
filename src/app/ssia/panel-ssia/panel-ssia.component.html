@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <div class="card text-white bg-danger mb-3" style="max-width: 18rem; ">
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;" (click)="irSubastasCerradas()">
         <div class="card-body">
           <h5 class="card-title">Subastas Cerradas</h5>
           <h4>{{ subastasCerradas.length }}</h4>
@@ -16,5 +16,5 @@
 
 <div >
     <button class="btn btn-success center" [routerLink]="['subastas/nueva']">Nueva Subasta</button>
-    <button class="btn btn-success center mt-4">Ver Inventario</button>
+    <button class="btn btn-success center mt-4" [routerLink]="['inventario']">Ver Inventario</button>
 </div>

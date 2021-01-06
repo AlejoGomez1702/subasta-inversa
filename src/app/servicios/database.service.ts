@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Inventario } from '../interfaces/inventario';
 import { Oferta } from '../interfaces/oferta';
 import { Producto } from '../interfaces/producto';
 import { Proveedor } from '../interfaces/proveedor';
@@ -23,10 +24,29 @@ export class DatabaseService
   // Ofertas de una subasta en especifico
   public oferta: Oferta;
 
+  public inventario: Inventario[] = [];
+
   constructor(
     private db: AngularFireDatabase
   ) 
   { }
+
+  async obtenerInventario()
+  {
+    let inventario: Inventario;
+    let inventarioResultado: Inventario[] = [];
+
+    await this.db.database.ref('/inventario').once('value')
+    .then((inventarios) => {
+      inventarios.forEach(element => {
+        inventario = element.val();
+        inventario.uid = element.key;
+        inventarioResultado.push(inventario);
+      });    
+
+      this.inventario = inventarioResultado;
+    });
+  }
 
   crearOferta(subasta: Subasta, proveedor: Proveedor, valor: number)
   {
@@ -113,6 +133,36 @@ export class DatabaseService
     });
   }
 
+  terminarSubasta(subasta: Subasta, oferta: Oferta)
+  {
+    this.cambiarEstadoSubasta(subasta);
+
+    const finalizada = {
+      subasta: subasta,
+      oferta: oferta
+    };
+    this.agregarInventario(subasta.producto, subasta.uidUsuario, oferta.valor);
+
+    return this.db.database.ref('/subastas_finalizadas').push(finalizada);
+  }
+
+  async cambiarEstadoSubasta(subasta: Subasta)
+  {
+    subasta.estado = true;
+    await this.db.database.ref('/subastas/' + subasta.uid).update(subasta);
+  }
+
+  async agregarInventario(producto, uidUsuario, valor)
+  {
+    const info = {
+      producto: producto,
+      uidUsuario: uidUsuario,
+      valor: valor
+    };
+
+    await this.db.database.ref('/inventario').push(info);
+  }
+
   async obtenerOfertas()
   {
     let ofertasResultado: Oferta[] = [];
@@ -165,27 +215,6 @@ export class DatabaseService
       }
     });
   }
-
-  // async obtenerSubastasDisonibles()
-  // {
-  //   this.subastasDisponibles = [];
-  //   let subastasResultado: Subasta[] = [];
-  //   let subasta: Subasta;
-
-  //   await this.db.database.ref('/subastas').once('value')
-  //   .then((subastas) => {
-  //     subastas.forEach(element => {
-  //       subasta = element.val();
-  //       if(!subasta.estado) // Si la subasta esta disponible
-  //       {
-  //         subasta.uid = element.key;
-  //         subastasResultado.push(subasta);
-  //       }        
-  //     });    
-
-  //     this.subastasDisponibles = subastasResultado;
-  //   });
-  // }
 
   eliminarSubastaPorID(uid)
   {

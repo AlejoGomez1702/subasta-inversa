@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Oferta } from '../interfaces/oferta';
 import { Producto } from '../interfaces/producto';
 import { Subasta } from '../interfaces/subasa';
 import { AutenticacionService } from './autenticacion.service';
@@ -20,6 +21,43 @@ export class SubastaService
     private autenticacionService: AutenticacionService
   ) 
   { }
+
+  cerrarSubasta(subasta: Subasta): boolean
+  {
+    // Ofertas de la subasta en cuestion.
+    let ofertasSubasta: Oferta[] = [];
+
+    const ofertas = this.databaseService.ofertas;
+    for (let i = 0; i < ofertas.length; i++) 
+    {
+      const oferta = ofertas[i];
+      if(oferta.subasta.uid == subasta.uid)
+      {
+        ofertasSubasta.push(oferta);
+      }
+    }
+
+    // Si no hay ofertas para la subasta.
+    if(ofertasSubasta.length == 0)
+      return false;
+
+    let mejorOferta: Oferta;
+    let valorMejorOferta = Infinity;
+
+    for (const oferta of ofertasSubasta) 
+    {
+      const valorOferta = oferta.valor;
+      if(valorOferta < valorMejorOferta)
+      {
+        mejorOferta = oferta;
+      }            
+    }
+
+    // Actualizando la base de datos 
+    this.databaseService.terminarSubasta(subasta, mejorOferta);
+
+    return true;    
+  }
 
   obtenerSubastas()
   {

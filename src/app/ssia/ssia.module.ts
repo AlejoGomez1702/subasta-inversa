@@ -9,10 +9,11 @@ import { NuevaSubastaComponent } from './panel-ssia/nueva-subasta/nueva-subasta.
 import { SeleccionarProductosComponent } from './panel-ssia/nueva-subasta/seleccionar-productos/seleccionar-productos.component';
 import { MilisPipe } from './pipes/milis.pipe';
 import { DetalleSubastaComponent } from './panel-ssia/detalle-subasta/detalle-subasta.component';
+import { InventarioComponent } from './panel-ssia/inventario/inventario.component';
 
 
 @NgModule({
-  declarations: [PanelSsiaComponent, SubastasCerradasComponent, SubastasAbiertasComponent, NuevaSubastaComponent, SeleccionarProductosComponent, MilisPipe, DetalleSubastaComponent],
+  declarations: [PanelSsiaComponent, SubastasCerradasComponent, SubastasAbiertasComponent, NuevaSubastaComponent, SeleccionarProductosComponent, MilisPipe, DetalleSubastaComponent, InventarioComponent],
   imports: [
     CommonModule,
     SsiaRoutingModule,

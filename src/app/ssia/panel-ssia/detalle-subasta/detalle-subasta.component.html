@@ -9,11 +9,13 @@
       <p class="card-text">Categoria =>  {{ subastaService.subasta.producto.categoria }}</p>
       <p class="card-text">Descripción =>  {{ subastaService.subasta.producto.descripcion }}</p>
       <p class="card-text">Valor Máximo =>  {{ subastaService.subasta.valorMaximo }}</p>
-      <button class="btn btn-success">Cerrar Subasta</button>
+      <button class="btn btn-success" (click)="cerrarSubasta(subastaService.subasta)">Cerrar Subasta</button>
     </div>
 </div>
 <br>
 <h2>Ofertas Realizadas Por Proveedores</h2>
+<br>
+<button class="btn btn-primary center mt-4"  (click)="filtrarOfertas()">Refrescar</button>
 <br>
 <div>
     <table class="table table-hover">

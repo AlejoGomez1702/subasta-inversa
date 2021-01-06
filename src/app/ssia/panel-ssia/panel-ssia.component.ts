@@ -24,6 +24,7 @@ export class PanelSsiaComponent implements OnInit
   ngOnInit(): void 
   {
     this.iniciarInformacion();
+    this.databaseService.obtenerInventario();
   }
 
   async iniciarInformacion()
@@ -49,6 +50,11 @@ export class PanelSsiaComponent implements OnInit
   irSubastasActivas()
   {
     this.router.navigate(['ssia/subastas/abiertas']);
+  }
+
+  irSubastasCerradas()
+  {
+    this.router.navigate(['ssia/subastas/cerradas']);
   }
 
 }
