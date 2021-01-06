@@ -25,7 +25,7 @@ export class SubastasDisponiblesComponent implements OnInit
 
   iniciarInformacion()
   {
-    this.subastaService.obtenerSubastasDisponibles();    
+    this.subastaService.obtenerSubastas();    
   }
 
   proponerOferta(subasta: Subasta)

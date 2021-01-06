@@ -21,9 +21,9 @@ export class SubastaService
   ) 
   { }
 
-  obtenerSubastasDisponibles()
+  obtenerSubastas()
   {
-    this.databaseService.obtenerSubastasDisonibles();
+    this.databaseService.obtenerSubastas();
   }
 
   crearSubasta(detalle: string, vMaximo: number)

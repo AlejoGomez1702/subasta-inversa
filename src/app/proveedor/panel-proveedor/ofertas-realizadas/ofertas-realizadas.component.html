@@ -1,0 +1,33 @@
+<div>
+    <h2 style="text-align: center;">
+      Ofertas Realizadas
+    </h2>
+</div>
+<hr>
+  
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Detalle</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Valor Máximo</th>
+        <th scope="col">Valor Ofertado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let oferta of ofertasRealizadas; index as i">
+        <th scope="row">{{ (i+1) }}</th>
+        <td>{{ oferta.subasta.detalle }}</td>
+        <td>{{ oferta.subasta.producto.nombre }}</td>
+        <td>{{ oferta.subasta.producto.categoria }}</td>
+        <td>{{ oferta.subasta.valorMaximo }}</td>
+        <td>{{ oferta.valor }}</td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+
+<button type="button" class="btn btn-primary" (click)="goBack()">Atras</button>
+

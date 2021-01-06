@@ -9,7 +9,7 @@
       <p class="card-text">Categoria =>  {{ subastaService.subasta.producto.categoria }}</p>
       <p class="card-text">Descripción =>  {{ subastaService.subasta.producto.descripcion }}</p>
       <p class="card-text">Valor Máximo =>  {{ subastaService.subasta.valorMaximo }}</p>
-      <a href="#" class="btn btn-success">Cerrar Subasta</a>
+      <button class="btn btn-success">Cerrar Subasta</button>
     </div>
 </div>
 <br>
@@ -20,22 +20,19 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Detalle</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Valor Máximo</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Proveedor</th>
+            <th scope="col">Valor</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row"></th>
-            <td>ds</td>
-            <td>ds</td>
-            <td>dsd</td>
-            <td>
-                dsds
-            </td>
-          </tr>
+          <ng-container *ngFor="let oferta of ofertas; index as i">
+            <tr>
+              <td>{{ (i+1) }}</td>
+              <td>{{ oferta.proveedor.nombre }}</td>
+              <td>{{ oferta.valor }}</td>
+            </tr>
+          </ng-container>
+          
         </tbody>
     </table>
 </div>

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Oferta } from '../interfaces/oferta';
 import { Producto } from '../interfaces/producto';
 import { Proveedor } from '../interfaces/proveedor';
 import { Subasta } from '../interfaces/subasa';
 import { User } from '../interfaces/user';
+import { ModalOfertaComponent } from '../proveedor/panel-proveedor/subastas-disponibles/modal-oferta/modal-oferta.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,10 @@ export class DatabaseService
   public productos: Producto[];
   public subastas: Subasta[] = [];
   public subastasDisponibles: Subasta[] = [];
+  public ofertas: Oferta[] = [];
+  public historialOfertas: Oferta[] = [];
+  // Ofertas de una subasta en especifico
+  public oferta: Oferta;
 
   constructor(
     private db: AngularFireDatabase
@@ -31,6 +37,23 @@ export class DatabaseService
     };
 
     return this.db.database.ref('/ofertas').push(oferta);
+  }
+
+  obtenerHistorialSubastasProveedor(): Oferta[]
+  {
+    let ofertas: Oferta[] = [];
+    console.log('Ofertas llamando al historial de proveedor');
+    console.log(this.ofertas);
+
+    this.ofertas.forEach(oferta => {
+      if(oferta.proveedor.uid == this.proveedorLogueado.uid)
+      {
+        ofertas.push(oferta);
+      }
+    });
+
+    this.historialOfertas = ofertas;
+    return ofertas;
   }
 
   guardarProveedorNuevo(uid, provName, provDirec, provTel, provWeb, email: string)
@@ -90,6 +113,23 @@ export class DatabaseService
     });
   }
 
+  async obtenerOfertas()
+  {
+    let ofertasResultado: Oferta[] = [];
+    let oferta: Oferta;
+
+    await this.db.database.ref('/ofertas').once('value')
+    .then((ofertas) => {
+      ofertas.forEach(element => {
+        oferta = element.val();
+        oferta.uid = element.key;
+        ofertasResultado.push(oferta);
+      });
+
+      this.ofertas = ofertasResultado;
+    });
+  }
+
 
   crearSubasta(subasta: Subasta)
   {
@@ -111,29 +151,41 @@ export class DatabaseService
       });    
 
       this.subastas = subastasResultado;
+      this.obtenerSubastasDisponibles();
     });
   }
 
-  async obtenerSubastasDisonibles()
+  obtenerSubastasDisponibles()
   {
     this.subastasDisponibles = [];
-    let subastasResultado: Subasta[] = [];
-    let subasta: Subasta;
-
-    await this.db.database.ref('/subastas').once('value')
-    .then((subastas) => {
-      subastas.forEach(element => {
-        subasta = element.val();
-        if(!subasta.estado) // Si la subasta esta disponible
-        {
-          subasta.uid = element.key;
-          subastasResultado.push(subasta);
-        }        
-      });    
-
-      this.subastasDisponibles = subastasResultado;
+    this.subastas.forEach(subasta => {
+      if(!subasta.estado)
+      {
+        this.subastasDisponibles.push(subasta);
+      }
     });
   }
+
+  // async obtenerSubastasDisonibles()
+  // {
+  //   this.subastasDisponibles = [];
+  //   let subastasResultado: Subasta[] = [];
+  //   let subasta: Subasta;
+
+  //   await this.db.database.ref('/subastas').once('value')
+  //   .then((subastas) => {
+  //     subastas.forEach(element => {
+  //       subasta = element.val();
+  //       if(!subasta.estado) // Si la subasta esta disponible
+  //       {
+  //         subasta.uid = element.key;
+  //         subastasResultado.push(subasta);
+  //       }        
+  //     });    
+
+  //     this.subastasDisponibles = subastasResultado;
+  //   });
+  // }
 
   eliminarSubastaPorID(uid)
   {

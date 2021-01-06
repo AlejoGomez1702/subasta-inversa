@@ -13,10 +13,10 @@
         </div>
     </div>
 
-    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;" (click)="irOfertasRealizadas()">
       <div class="card-body">
-        <h5 class="card-title">Subastas Ofertadas</h5>
-        <!-- <h4>{{ subastasGanadas.length }}</h4> -->
+        <h5 class="card-title">Ofertas Realizadas</h5>
+        <h4>{{ databaseService.historialOfertas.length }}</h4>
       </div>
   </div>
 
