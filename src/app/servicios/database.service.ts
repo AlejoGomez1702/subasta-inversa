@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { element } from 'protractor';
 import { Inventario } from '../interfaces/inventario';
 import { Oferta } from '../interfaces/oferta';
 import { Producto } from '../interfaces/producto';
 import { Proveedor } from '../interfaces/proveedor';
 import { Subasta } from '../interfaces/subasa';
+import { SubastaFinalizada } from '../interfaces/subastaFinalizada';
 import { User } from '../interfaces/user';
 import { ModalOfertaComponent } from '../proveedor/panel-proveedor/subastas-disponibles/modal-oferta/modal-oferta.component';
 
@@ -26,10 +28,48 @@ export class DatabaseService
 
   public inventario: Inventario[] = [];
 
+  public subastasFinalizadas: SubastaFinalizada[] = []; 
+
+  public subastasGanadas: SubastaFinalizada[] = [];
+
   constructor(
     private db: AngularFireDatabase
   ) 
   { }
+
+  async obtenerSubastasFinalizadas()
+  {
+    let subastaFinalizada: SubastaFinalizada;
+    let subastasResultado: SubastaFinalizada[] =[];
+
+    await this.db.database.ref('/subastas_finalizadas').once('value')
+    .then((subastas) => {
+      subastas.forEach(element => {
+        subastaFinalizada = element.val();
+        subastaFinalizada.uid = element.key;
+        subastasResultado.push(subastaFinalizada);
+      });
+
+      this.subastasFinalizadas = subastasResultado;
+    });
+
+    this.obtenerSubastasGanadasProveedor();
+  }
+
+  obtenerSubastasGanadasProveedor()
+  {
+    this.subastasGanadas = [];
+    const subastas: SubastaFinalizada[] = this.subastasFinalizadas;
+    const proveedor: Proveedor = this.proveedorLogueado;
+
+    for (const subasta of subastas) 
+    {
+      if(proveedor.uid == subasta.oferta.proveedor.uid)
+      {
+        this.subastasGanadas.push(subasta);
+      }
+    }
+  }
 
   async obtenerInventario()
   {

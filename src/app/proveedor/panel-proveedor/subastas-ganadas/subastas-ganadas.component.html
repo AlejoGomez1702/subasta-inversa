@@ -1,0 +1,33 @@
+<div>
+    <h2 style="text-align: center;">
+      Subastas Ganadas
+    </h2>
+</div>
+<hr>
+  
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Detalle</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Imagen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let subasta of databaseService.subastasGanadas; index as i">
+        <th scope="row">{{ (i+1) }}</th>
+        <td>{{ subasta.subasta.detalle }}</td>
+        <td>{{ subasta.subasta.producto.nombre }}</td>
+        <td>{{ subasta.subasta.producto.categoria }}</td>
+        <td>{{ subasta.oferta.valor }}</td>
+        <td><a href="{{ subasta.subasta.producto.imagen }}" target="_blank" rel="noopener noreferrer">Ver</a></td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+
+<button type="button" class="btn btn-primary" (click)="goBack()">Atras</button>
+

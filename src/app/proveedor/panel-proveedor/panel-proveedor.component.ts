@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Oferta } from 'src/app/interfaces/oferta';
+import { Proveedor } from 'src/app/interfaces/proveedor';
 import { Subasta } from 'src/app/interfaces/subasa';
+import { SubastaFinalizada } from 'src/app/interfaces/subastaFinalizada';
 import { DatabaseService } from 'src/app/servicios/database.service';
 
 @Component({
@@ -12,6 +14,7 @@ import { DatabaseService } from 'src/app/servicios/database.service';
 export class PanelProveedorComponent implements OnInit 
 {
   // public ofertas: Oferta[] = [];
+  public subastasGanadas: SubastaFinalizada[] = [];
 
   constructor(
     private router: Router,
@@ -25,6 +28,24 @@ export class PanelProveedorComponent implements OnInit
     .then(() => {
       this.databaseService.obtenerHistorialSubastasProveedor();
     });    
+    this.databaseService.obtenerSubastasFinalizadas();
+
+    this.filtarSubastas();
+  }
+
+  filtarSubastas()
+  {
+    this.subastasGanadas = [];
+    const subastas: SubastaFinalizada[] = this.databaseService.subastasFinalizadas;
+    const proveedor: Proveedor = this.databaseService.proveedorLogueado;
+
+    for (const subasta of subastas) 
+    {
+      if(proveedor.uid == subasta.oferta.proveedor.uid)
+      {
+        this.subastasGanadas.push(subasta);
+      }
+    }
   }
 
   irSubastasDisponibles()
@@ -35,6 +56,11 @@ export class PanelProveedorComponent implements OnInit
   irOfertasRealizadas()
   {
     this.router.navigate(['proveedor/subastas/ofertas']);
+  }
+
+  irSubastasGanadas()
+  {
+    this.router.navigate(['proveedor/subastas/ganadas']);
   }
 
 }
